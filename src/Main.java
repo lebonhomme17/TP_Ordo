@@ -30,11 +30,14 @@ public class Main {
         System.out.println("Valeur = "+ Solveur.eval(h));
 
 
-        System.out.println("2)");
+        System.out.println("2) et 3)");
 
         ArrayList<Job> sol = Solveur.solve(jobs);
         System.out.println("Solution optimale : " + affichageSolution(sol));
         System.out.println("Valeur = "+ Solveur.eval(sol));
+
+        System.out.println("Exercice 2 :");
+        System.out.println("1)");
 
     }
 }
