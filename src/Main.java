@@ -16,6 +16,8 @@ public class Main {
     }
 
     public static void main(String[] args){
+        System.out.println("Exercice 1 :");
+        System.out.println("1)");
         ArrayList<Job> jobs = new ArrayList<>();
         jobs.add(new Job("J1", 3,16,2));
         jobs.add(new Job("J2", 7,15,3));
@@ -26,5 +28,13 @@ public class Main {
         ArrayList h = Solveur.heuristique(jobs);
         System.out.println("Solution de l'heuristique di/wi décroissants : " + affichageSolution(h));
         System.out.println("Valeur = "+ Solveur.eval(h));
+
+
+        System.out.println("2)");
+
+        ArrayList<Job> sol = Solveur.solve(jobs);
+        System.out.println("Solution optimale : " + affichageSolution(sol));
+        System.out.println("Valeur = "+ Solveur.eval(sol));
+
     }
 }
