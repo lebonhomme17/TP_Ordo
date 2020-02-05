@@ -1,14 +1,20 @@
 package probleme;
 
 public class Job {
+    private String name;
     private int p;
     private int d;
     private int w;
 
-    public Job(int p, int d, int w) {
+    public Job(String name, int p, int d, int w) {
+        this.name = name;
         this.p = p;
         this.d = d;
         this.w = w;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getP() {
@@ -21,6 +27,10 @@ public class Job {
 
     public int getD() {
         return d;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setD(int d) {
