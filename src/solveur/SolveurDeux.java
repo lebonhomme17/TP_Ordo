@@ -35,31 +35,50 @@ public class SolveurDeux {
         return new SolutionDeux(m1, m2);
     }
 
-    /*public static SolveurDeux solve(ArrayList<Job> jobs){
+    public static SolutionDeux solve(ArrayList<Job> jobs){
+        SolutionDeux best = solutionApproche(jobs);
+        int bsup = best.eval();
 
-    }*/
+        SolutionIntermediaireDeux init = new SolutionIntermediaireDeux(jobs);
 
-    public static int eval(SolutionDeux solution){
-        int res = 0;
-        int c = 0;
+        //utilisation de la propriété 2
+        init.getReste().sort(new Comparator<Job>() {
+            @Override
+            public int compare(Job o1, Job o2) {
+                return o1.getD()-o2.getD();
+            }
+        });
 
-        for(Job j : solution.getM1()){
-            c += j.getP();
-            int retard = j.getD()-c;
-            if(retard > res){
-                res = retard;
+        ArrayList<SolutionIntermediaireDeux> tree = new ArrayList<>();
+
+        //utilisation de la propriété 3
+        tree.add(new SolutionIntermediaireDeux(init, 1));
+
+        while(!tree.isEmpty()){
+            tree.sort(new Comparator<SolutionIntermediaireDeux>() {
+                @Override
+                public int compare(SolutionIntermediaireDeux o1, SolutionIntermediaireDeux o2) {
+                    return o1.borneInf() - o2.borneInf();
+                }
+            });
+
+            SolutionIntermediaireDeux si = tree.get(0);
+            tree.remove(0);
+
+            for(SolutionIntermediaireDeux sol : si.nexts()){
+                if(!sol.hasNext()){
+                    if(sol.borneInf()<bsup){
+                        bsup = sol.borneInf();
+                        best = sol.getSolution();
+                    }
+                }else if(sol.borneInf()<bsup){
+                    tree.add(sol);
+                }
             }
         }
 
-        c = 0;
-        for(Job j : solution.getM2()){
-            c += j.getP();
-            int retard = j.getD()-c;
-            if(retard > res){
-                res = retard;
-            }
-        }
-
-        return res;
+        return best;
     }
+
+
 }

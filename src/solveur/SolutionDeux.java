@@ -52,4 +52,28 @@ public class SolutionDeux {
 
         return sb.toString();
     }
+
+    public int eval(){
+        int res = 0;
+        int c = 0;
+
+        for(Job j : m1){
+            c += j.getP();
+            int retard = c-j.getD();
+            if(retard > res){
+                res = retard;
+            }
+        }
+
+        c = 0;
+        for(Job j : m2){
+            c += j.getP();
+            int retard = c-j.getD();
+            if(retard > res){
+                res = retard;
+            }
+        }
+
+        return res;
+    }
 }

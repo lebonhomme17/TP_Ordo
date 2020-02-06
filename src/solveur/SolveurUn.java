@@ -27,36 +27,24 @@ public class SolveurUn {
         ArrayList<SolutionIntermediaire> tree = new ArrayList<>();
         tree.add(new SolutionIntermediaire(jobs));
         while (!tree.isEmpty()){
-            ArrayList<SolutionIntermediaire> suppr = new ArrayList<>();//liste des solutions à supprimer
+            tree.sort(new Comparator<SolutionIntermediaire>() {
+                @Override
+                public int compare(SolutionIntermediaire solutionIntermediaire, SolutionIntermediaire t1) {
+                    return solutionIntermediaire.borneInf() - t1.borneInf();
+                }
+            });
 
-
-            for(SolutionIntermediaire si : tree){
+            SolutionIntermediaire sol = tree.get(0);
+            tree.remove(sol);
+            for(SolutionIntermediaire si : sol.nexts()){
                 if(!si.hasNext()){
                     if(si.borneInf()<bsup){
                         bsup = si.borneInf();
                         best = si.getOrdonnes();
                     }
-                    suppr.add(si);
-                }else if(si.borneInf()>=bsup){
-                    suppr.add(si);
+                }else if(si.borneInf()<bsup){
+                    tree.add(si);
                 }
-            }
-
-            tree.removeAll(suppr);
-
-
-            if(!tree.isEmpty()) {
-                tree.sort(new Comparator<SolutionIntermediaire>() {
-                    @Override
-                    public int compare(SolutionIntermediaire solutionIntermediaire, SolutionIntermediaire t1) {
-                        return solutionIntermediaire.borneInf() - t1.borneInf();
-                    }
-                });
-
-                SolutionIntermediaire sol = tree.get(0);
-                tree.remove(sol);
-                tree.addAll(sol.nexts());
-
             }
 
 

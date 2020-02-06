@@ -26,7 +26,7 @@ public class Main {
 
 
         System.out.println("Exercice 1 :");
-        System.out.println("1)");
+
         ArrayList<Job> jobs = new ArrayList<>();
         jobs.add(new Job("J1", 3,16,2));
         jobs.add(new Job("J2", 7,15,3));
@@ -35,14 +35,13 @@ public class Main {
         jobs.add(new Job("J5", 5,10,4));
 
         ArrayList h = SolveurUn.heuristique(jobs);
-        System.out.println("Solution de l'heuristique di/wi décroissants : " + affichageSolution(h));
+        System.out.println("\nSolution de l'heuristique di/wi décroissants : " + affichageSolution(h));
         System.out.println("Valeur = "+ SolveurUn.eval(h));
 
 
-        System.out.println("2) et 3)");
 
         ArrayList<Job> sol = SolveurUn.solve(jobs);
-        System.out.println("Solution optimale : " + affichageSolution(sol));
+        System.out.println("\nSolution optimale : " + affichageSolution(sol));
         System.out.println("Valeur = "+ SolveurUn.eval(sol));
 
 
@@ -51,8 +50,8 @@ public class Main {
          *********************************/
 
 
-        System.out.println("Exercice 2 :");
-        System.out.println("1)");
+        System.out.println("\n\nExercice 2 :");
+
 
         ArrayList<Job> jobs2 = new ArrayList();
         jobs2.add(new Job("T1", 3,4));
@@ -63,9 +62,14 @@ public class Main {
         jobs2.add(new Job("T6", 5,10));
 
         SolutionDeux approche = SolveurDeux.solutionApproche(jobs2);
-        System.out.println("Solution approchée  :");
+        System.out.println("\nSolution approchée  :");
         System.out.println(approche.toString());
-        System.out.println("Retard max = " + SolveurDeux.eval(approche));
+        System.out.println("Retard max = " + approche.eval());
+
+        SolutionDeux sol2 = SolveurDeux.solve(jobs2);
+        System.out.println("\nSolution optimale  :");
+        System.out.println(sol2.toString());
+        System.out.println("Retard max = " + sol2.eval());
 
     }
 }
