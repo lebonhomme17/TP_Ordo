@@ -13,6 +13,10 @@ public class Job {
         this.w = w;
     }
 
+    public Job(String name, int p, int d) {
+        this(name, p, d, 1);
+    }
+
     public String getName() {
         return name;
     }

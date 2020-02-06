@@ -1,5 +1,7 @@
 import probleme.Job;
-import solveur.Solveur;
+import solveur.SolutionDeux;
+import solveur.SolveurDeux;
+import solveur.SolveurUn;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,13 @@ public class Main {
     }
 
     public static void main(String[] args){
+
+
+        /*********************************
+         * Exercice 1
+         *********************************/
+
+
         System.out.println("Exercice 1 :");
         System.out.println("1)");
         ArrayList<Job> jobs = new ArrayList<>();
@@ -25,19 +34,38 @@ public class Main {
         jobs.add(new Job("J4", 3,4,2));
         jobs.add(new Job("J5", 5,10,4));
 
-        ArrayList h = Solveur.heuristique(jobs);
+        ArrayList h = SolveurUn.heuristique(jobs);
         System.out.println("Solution de l'heuristique di/wi décroissants : " + affichageSolution(h));
-        System.out.println("Valeur = "+ Solveur.eval(h));
+        System.out.println("Valeur = "+ SolveurUn.eval(h));
 
 
         System.out.println("2) et 3)");
 
-        ArrayList<Job> sol = Solveur.solve(jobs);
+        ArrayList<Job> sol = SolveurUn.solve(jobs);
         System.out.println("Solution optimale : " + affichageSolution(sol));
-        System.out.println("Valeur = "+ Solveur.eval(sol));
+        System.out.println("Valeur = "+ SolveurUn.eval(sol));
+
+
+        /*********************************
+         * Exercice 2
+         *********************************/
+
 
         System.out.println("Exercice 2 :");
         System.out.println("1)");
+
+        ArrayList<Job> jobs2 = new ArrayList();
+        jobs2.add(new Job("T1", 3,4));
+        jobs2.add(new Job("T2", 4,6));
+        jobs2.add(new Job("T3", 6,8));
+        jobs2.add(new Job("T4", 3,7));
+        jobs2.add(new Job("T5", 2,9));
+        jobs2.add(new Job("T6", 5,10));
+
+        SolutionDeux approche = SolveurDeux.solutionApproche(jobs2);
+        System.out.println("Solution approchée  :");
+        System.out.println(approche.toString());
+        System.out.println("Retard max = " + SolveurDeux.eval(approche));
 
     }
 }

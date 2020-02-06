@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 
-public class Solveur {
+public class SolveurUn {
 
     //ordre decroissant des Di/Wi
     public static ArrayList<Job> heuristique(ArrayList<Job> jobs){
