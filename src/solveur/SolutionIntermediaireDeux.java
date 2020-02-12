@@ -39,8 +39,29 @@ public class SolutionIntermediaireDeux {
 
     public ArrayList<SolutionIntermediaireDeux> nexts(){
         ArrayList<SolutionIntermediaireDeux> res = new ArrayList<>();
-        res.add(new SolutionIntermediaireDeux(this, 1));
-        res.add(new SolutionIntermediaireDeux(this, 2));
+        if(reste.size()!=0){
+            if(reste.size()==1){
+
+                int c1=0;
+                int c2=0;
+                for(Job j : solution.getM1()){
+                    c1 += j.getP();
+                }
+                for(Job j : solution.getM2()){
+                    c2 += j.getP();
+                }
+
+                if(c1<=c2 && c2-c1<=reste.get(0).getP()){
+                    res.add(new SolutionIntermediaireDeux(this, 1));
+                }
+                else if(c2<c1 && c1-c2<=reste.get(0).getP()){
+                    res.add(new SolutionIntermediaireDeux(this, 2));
+                }
+            }else{
+                res.add(new SolutionIntermediaireDeux(this, 1));
+                res.add(new SolutionIntermediaireDeux(this, 2));
+            }
+        }
         return res;
     }
 
