@@ -7,10 +7,12 @@ import java.util.ArrayList;
 public class SolutionIntermediaire{
     private ArrayList<Job> ordonnes;
     private ArrayList<Job> non_ordonnes;
+    private int binf;
 
     public SolutionIntermediaire(ArrayList<Job> jobs){
         this.ordonnes = new ArrayList<>();
         this.non_ordonnes = new ArrayList<>(jobs);
+        this.binf = -1;
     }
 
     public SolutionIntermediaire(SolutionIntermediaire si, Job j){
@@ -19,7 +21,7 @@ public class SolutionIntermediaire{
         this.ordonnes.addAll(si.ordonnes);
         this.non_ordonnes = new ArrayList<>(si.non_ordonnes);
         this.non_ordonnes.remove(j);
-
+        this.binf = -1;
     }
 
     public ArrayList<Job> getOrdonnes() {
@@ -39,17 +41,19 @@ public class SolutionIntermediaire{
     }
 
     public int borneInf(){
-        int res = 0;
-        int c = 0;
-        for(Job j : non_ordonnes){
-            c+=j.getP();
-        }
-        for (Job j : ordonnes){
-            c+=j.getP();
-            if(c>j.getD()){
-                res += (c-j.getD()) * j.getW();
+        if(binf==-1){
+            binf = 0;
+            int c = 0;
+            for(Job j : non_ordonnes){
+                c+=j.getP();
+            }
+            for (Job j : ordonnes){
+                c+=j.getP();
+                if(c>j.getD()){
+                    binf += (c-j.getD()) * j.getW();
+                }
             }
         }
-        return res;
+        return binf;
     }
 }
